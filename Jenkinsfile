@@ -20,7 +20,7 @@ pipeline {
         stage('Start Docker step') {
             steps {
                 sh 'docker run --rm -i hadolint/hadolint < ${PATH_DOCKERFILE}'
-            }
+            
 
               script {
               dockerImage = docker.build ("${USER_REPO}/${IMAGE_NAME}", "-f ${PATH_DOCKERFILE} .")
@@ -29,6 +29,7 @@ pipeline {
               script {
               docker.withRegistry( '', registryCredential ) {
               dockerImage.push("${DOCKER_TAG}")
+              }
               }
             }
           }
