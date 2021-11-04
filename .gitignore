@@ -1,0 +1,12 @@
+**/vagrant_ansible_inventory
+*.bak
+*.tfstate
+*.tfstate.backup
+.terraform/
+contrib/terraform/aws/credentials.tfvars
+
+# Ansible inventory
+inventory/*
+!inventory/local
+!inventory/sample
+inventory/*/artifacts/
