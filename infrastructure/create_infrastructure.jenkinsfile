@@ -1,0 +1,41 @@
+pipeline {
+    agent { node { label 'Ansible' } }
+    parameters {
+    }
+
+    options {
+        ansiColor('xterm')
+        timestamps () }
+stages {
+        stage('Checkout GitHub') {
+            steps {
+                git branch: 'main',
+                url: 'git@github.com:jkz01/TMS_Project.git'
+            }
+        }
+
+        stage('Create Infrastructure') {
+            steps {
+              script {
+                sh """
+                cd terraform
+                terraform init
+                terraform plan -out=tfplan.tf -input=false
+                """
+                }
+              script {
+                def userInput = input(id: 'confirm', message: 'Apply Terraform?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Apply terraform', name: 'confirm'] ])
+                }
+            }
+        }
+
+        stage('Create Infrastructure Apply') {
+            steps {
+              script {
+                sh '''cd terraform
+                terraform apply -input=false tfplan'''
+            }
+          }
+        }
+}
+}
