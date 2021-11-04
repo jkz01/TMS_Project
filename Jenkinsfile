@@ -22,20 +22,17 @@ pipeline {
                 sh 'docker run --rm -i hadolint/hadolint < ${PATH_DOCKERFILE}'
             }
 
-            steps {
               script {
               dockerImage = docker.build ("${USER_REPO}/${IMAGE_NAME}", "-f ${PATH_DOCKERFILE} .")
               }
-           }
-
-            steps{
+           
               script {
               docker.withRegistry( '', registryCredential ) {
               dockerImage.push("${DOCKER_TAG}")
               }
             }
           }
-        }
+
 
         stage('Remove unused docker image') {
             steps{
