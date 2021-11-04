@@ -17,22 +17,17 @@ pipeline {
       timestamps () }
 
     stages{
-        stage('Start dockerfile_lint') {
+        stage('Start Docker step') {
             steps {
-                echo "========== Start Dockerfile_lint =========="
                 sh 'docker run --rm -i hadolint/hadolint < ${PATH_DOCKERFILE}'
             }
-        }
 
-        stage('Building Docker Image') {
             steps {
               script {
               dockerImage = docker.build ("${USER_REPO}/${IMAGE_NAME}", "-f ${PATH_DOCKERFILE} .")
               }
            }
-        }
 
-        stage('Deploy Docker Image') {
             steps{
               script {
               docker.withRegistry( '', registryCredential ) {
