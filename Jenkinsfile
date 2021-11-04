@@ -32,6 +32,8 @@ pipeline {
 
               sh "docker rmi ${USER_REPO}/${IMAGE_NAME}:${DOCKER_TAG}"
 
-              }
             }
           }
+        }
+  }
+}
