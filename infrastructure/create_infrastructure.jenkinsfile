@@ -33,7 +33,7 @@ stages {
             steps {
               script {
                 sh '''cd terraform
-                terraform apply -input=false tfplan'''
+                terraform apply -input=false tfplan.tf'''
             }
           }
         }
