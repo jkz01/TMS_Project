@@ -1,0 +1,7 @@
+master-count = "1"
+etcd-count = "1"
+worker-count = "2"
+master-name = "k8s-master-node"
+etcd-name = "k8s-etcd-node"
+worker-name = "k8s-worker-node"
+inventory_file = "inventory.ini"

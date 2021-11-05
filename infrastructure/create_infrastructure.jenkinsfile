@@ -1,19 +1,19 @@
 pipeline {
     agent { node { label 'Ansible' } }
-    parameters {
+/*    parameters {
     }
-
+*/
     options {
         ansiColor('xterm')
         timestamps () }
 stages {
-        stage('Checkout GitHub') {
+/*        stage('Checkout GitHub') {
             steps {
                 git branch: 'main',
                 url: 'git@github.com:jkz01/TMS_Project.git'
             }
         }
-
+*/
         stage('Create Infrastructure') {
             steps {
               script {
