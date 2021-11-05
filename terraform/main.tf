@@ -35,7 +35,7 @@ resource "aws_instance" "etcd-node" {
       }
 }
 
-resource "aws_instance" "ingress-node" {
+/*resource "aws_instance" "ingress-node" {
   ami = var.instance_ami
   instance_type = var.instance_type
   key_name = var.key_pair
@@ -45,7 +45,7 @@ resource "aws_instance" "ingress-node" {
     Name = "${var.ingress-name}-${count.index + 1}"
       }
 }
-
+*/
 resource "local_file" "hosts_cfg" {
   content = templatefile("templates/inventory.tpl",
     {
