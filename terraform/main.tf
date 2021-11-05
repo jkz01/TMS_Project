@@ -7,6 +7,7 @@ resource "aws_instance" "master-node" {
   instance_type = var.instance_type
   key_name = var.key_pair
   count = var.master-count
+  user_data = "${file("install.sh")}"
   tags = {
     Name = "${var.master-name}-${count.index + 1}"
       }
@@ -17,6 +18,7 @@ resource "aws_instance" "worker-node" {
   instance_type = var.instance_type
   key_name = var.key_pair
   count = var.worker-count
+  user_data = "${file("install.sh")}"
   tags = {
     Name = "${var.worker-name}-${count.index + 1}"
       }
@@ -27,6 +29,7 @@ resource "aws_instance" "etcd-node" {
   instance_type = var.instance_type
   key_name = var.key_pair
   count = var.etcd-count
+  user_data = "${file("install.sh")}"
   tags = {
     Name = "${var.etcd-name}-${count.index + 1}"
       }
