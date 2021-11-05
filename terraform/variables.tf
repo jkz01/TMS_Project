@@ -2,6 +2,10 @@ variable "instance_type" {
   type = string
   default = "t2.micro"  
 }
+variable "instance_type_master" {
+  type = string
+  default = "t2.medium"  
+}
 variable "instance_ami" {
   type = string
   default = "ami-036d46416a34a611c"
@@ -11,6 +15,11 @@ variable "key_pair" {
   default = "TMS-Project"
 }
 variable "master-count" {
+type = string
+description = "Number of VM"
+default     =  1
+}
+variable "ingress-count" {
 type = string
 description = "Number of VM"
 default     =  1
@@ -35,5 +44,8 @@ variable "etcd-name" {
 type = string
 }
 variable "worker-name" {
+type = string
+}
+variable "ingress-name" {
 type = string
 }

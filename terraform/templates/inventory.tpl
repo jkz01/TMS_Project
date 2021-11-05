@@ -8,10 +8,18 @@ worker-node-${name} ansible_host=${ip}
 %{ for name,ip in master-node ~}
 master-node-${name} ansible_host=${ip}
 %{ endfor ~}
+%{ for name,ip in ingress-node ~}
+ingress-node-${name} ansible_host=${ip}
+%{ endfor ~}
 
 [kube_control_plane]
 %{ for name,ip in master-node ~}
 master-node-${name} ansible_host=${ip}
+%{ endfor ~}
+
+[kube_ingress]
+%{ for name,ip in ingress-node ~}
+ingress-node-${name} ansible_host=${ip}
 %{ endfor ~}
 
 [etcd]
