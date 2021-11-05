@@ -20,7 +20,7 @@ stages {
                 sh """
                 cd terraform
                 terraform init
-                terraform plan -out=tfplan.tf -input=false
+                terraform plan -out=tfplan -input=false
                 """
                 }
               script {
@@ -33,7 +33,7 @@ stages {
             steps {
               script {
                 sh '''cd terraform
-                terraform apply -input=false tfplan.tf'''
+                terraform apply -input=false tfplan'''
             }
           }
         }
