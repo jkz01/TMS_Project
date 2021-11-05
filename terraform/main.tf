@@ -4,7 +4,7 @@ provider "aws" {
 }
 resource "aws_instance" "master-node" {
   ami = var.instance_ami
-  instance_type = var.instance_type_master
+  instance_type = var.instance_type
   key_name = var.key_pair
   count = var.master-count
   user_data = "${file("install.sh")}"
