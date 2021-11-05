@@ -15,11 +15,6 @@ type = string
 description = "Number of VM"
 default     =  1
 }
-variable "ingress-count" {
-type = string
-description = "Number of VM"
-default     =  1
-}
 variable "etcd-count" {
 type = string
 description = "Number of VM"
@@ -40,8 +35,5 @@ variable "etcd-name" {
 type = string
 }
 variable "worker-name" {
-type = string
-}
-variable "ingress-name" {
 type = string
 }
