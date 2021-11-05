@@ -19,9 +19,10 @@ output "etcd-ip" {
   }
 }
 
-output "ingress-ip" {
+/*output "ingress-ip" {
   value = {
     for instance in aws_instance.ingress-node :
     instance.tags.Name => instance.public_ip
   }
 }
+*/
