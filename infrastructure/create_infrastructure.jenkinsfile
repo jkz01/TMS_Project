@@ -23,7 +23,10 @@ stages {
             steps {
               script {
                 sh '''cd terraform
-                terraform apply -input=false tfplan'''
+                terraform apply -input=false tfplan
+                sleep 30
+                cd ../kubespray
+                ansible-playbook -i ../terraform/hosts cluster.yml --become --user=ubuntu --private-key=/home/TMS-Project.pem'''
             }
           }
         }
