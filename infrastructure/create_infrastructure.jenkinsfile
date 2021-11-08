@@ -1,5 +1,5 @@
 pipeline {
-    agent { node { label 'Ansible' } }
+    agent any
     options {
         ansiColor('xterm')
         timestamps () }
