@@ -26,6 +26,7 @@ stages {
                 terraform apply -input=false tfplan
                 sleep 30
                 cd ../kubespray
+                git checkout master
                 ansible-playbook -i ../terraform/hosts cluster.yml --become --user=ubuntu --private-key=/home/TMS-Project.pem'''
             }
           }
