@@ -38,9 +38,9 @@ resource "aws_instance" "etcd-node" {
 resource "local_file" "hosts_cfg" {
   content = templatefile("templates/inventory.tpl",
     {
-      master-node = aws_instance.master-node.*.public_ip
-      etcd-node = aws_instance.etcd-node.*.public_ip
-      worker-node = aws_instance.worker-node.*.public_ip
+      master-node = aws_instance.master-node.*.private_ip
+      etcd-node = aws_instance.etcd-node.*.private_ip
+      worker-node = aws_instance.worker-node.*.private_ip
     }
   )
   filename = "./hosts"
