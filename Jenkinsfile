@@ -6,6 +6,12 @@ pipeline {
     string(name: 'PATH_DOCKERFILE', defaultValue: 'app/Dockerfile', description: '')
     string(name: 'IMAGE_NAME', defaultValue: 'project', description: '')
     string(name: 'USER_REPO', defaultValue: 'jkz01', description: '')
+    string(name: 'NAMESPACE_TEST', defaultValue: 'test-namespace', description: '')
+    string(name: 'NAMESPACE_PROD', defaultValue: 'prod-namespace', description: '')
+    string(name: 'CHART_NAME', defaultValue: 'project', description: '')
+    string(name: 'CHART_PATH', defaultValue: 'chart-app', description: '')
+    string(name: 'VALUES_PROD', defaultValue: 'values_prod.yaml', description: '')
+    string(name: 'VALUES_TEST', defaultValue: 'values_test.yaml', description: '')
     }
     environment {
         registry = "jkz01/dos03"
