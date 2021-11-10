@@ -54,11 +54,11 @@ pipeline {
             steps{
 			      sh ('''#!/bin/bash
             sleep 15
-            status_app_test=$(curl -o /dev/null  -s  -w "%{http_code}"  http://10.10.18.158:30000)
+            status_app_test=$(curl -o /dev/null  -s  -w "%{http_code}"  http://project.my:30030)
 	          if [[ $status_app_test == 200 ]]; then
-	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://tms.exam:30000 AVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
+	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://project.my:30030 AVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
 	          else
-	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://tms.exam:30000 IS UNAVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
+	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://project.my:30030 IS UNAVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
 	          fi
             ''')
             }
