@@ -4,6 +4,6 @@ image:
 ReplicaCount: 1
 Ports:
   Port: 80
-  NodePort: 3030
+  NodePort: 30030
 Service:
   name: service-test
