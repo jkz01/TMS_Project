@@ -54,8 +54,7 @@ pipeline {
 	          else
 	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://tms.exam:30000 IS UNAVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
 	          fi
-            '''
-            )
+            ''')
             }
         }
   }
