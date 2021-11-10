@@ -4,6 +4,6 @@ image:
 ReplicaCount: 2
 Ports:
   Port: 80
-  targetPort: 80
+  NodePort: 3050
 Service:
   name: service-prod

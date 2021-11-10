@@ -6,9 +6,8 @@ metadata:
 spec:
   selector:
     project: {{ .Release.Name }}
+  type: NodePort
   ports:
     - name: web
-      protocol : TCP
       port: {{ .Values.Ports.Port }}
-      targetPort: {{ .Values.Ports.TargetPort }}
-  type: LoadBalancer
+      nodePort: {{ .Values.Ports.NodePort }}

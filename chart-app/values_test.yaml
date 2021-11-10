@@ -3,7 +3,7 @@ image:
   tag: ""
 ReplicaCount: 1
 Ports:
-  Port: 8080
-  targetPort: 80
+  Port: 80
+  NodePort: 3030
 Service:
   name: service-test
