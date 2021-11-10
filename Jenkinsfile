@@ -54,14 +54,38 @@ pipeline {
             steps{
 			      sh ('''#!/bin/bash
             sleep 15
-            status_app_test=$(curl -o /dev/null  -s  -w "%{http_code}"  http://project.my:30030)
+            status_app_test=$(curl -o /dev/null  -s  -w "%{http_code}"  http://project.silich:30030)
 	          if [[ $status_app_test == 200 ]]; then
-	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://project.my:30030 AVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
+	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE PORT 30030 UP"}' ${SLACK_ID}
 	          else
-	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://project.my:30030 IS UNAVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
+	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE PORT 30030 DOWN"}' ${SLACK_ID}
 	          fi
             ''')
             }
         }
+
+        stage('Approval deploy to prod') {
+            steps {
+              script {
+                def userInput = input(id: 'confirm', message: 'Apply deploy to PROD?', parameters: [ [$class: 'BooleanParameterDefinition', defaultValue: false, description: 'Deploy to production?', name: 'confirm'] ])
+                }
+            }
+        }
+
+        stage('Deploy to prod ns') {
+            steps{
+            sh ('''#!/bin/bash
+            helm upgrade --install ${CHART_NAME} ${CHART_PATH}/ -n ${NAMESPACE_PROD} --create-namespace -f ${CHART_PATH}/${VALUES_PROD} --set image.tag=${DOCKER_TAG}
+            sleep 15
+            status_app_prod=$(curl -o /dev/null  -s  -w "%{http_code}"  http://project.silich:30050)
+	          if [[ $status_app_prod == 200 ]]; then
+	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE PORT 30050 UP"}' ${SLACK_ID}
+	          else
+	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE PORT 30050 DOWN"}' ${SLACK_ID}
+	          fi
+            '''
+          )
+        }
+      }
   }
 }
