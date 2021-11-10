@@ -1,0 +1,9 @@
+image:
+  repository: "jkz01/project"
+  tag: ""
+ReplicaCount: 2
+Ports:
+  Port: 80
+  targetPort: 80
+Service:
+  name: service-prod

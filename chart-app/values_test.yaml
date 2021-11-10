@@ -1,0 +1,9 @@
+image:
+  repository: "jkz01/project"
+  tag: ""
+ReplicaCount: 1
+Ports:
+  Port: 8080
+  targetPort: 80
+Service:
+  name: service-test

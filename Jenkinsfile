@@ -1,3 +1,5 @@
+def SLACK_ID
+
 pipeline {
     agent { node { label 'Ansible' } }
     parameters {
@@ -34,6 +36,26 @@ pipeline {
 
             }
           }
+        }
+
+        stage('Deploy app to test namespace') {
+            steps{
+            sh "helm upgrade --install ${CHART_NAME} ${CHART_PATH}/ -n ${NAMESPACE_TEST} --create-namespace -f ${CHART_PATH}/${VALUES_TEST} --set image.tag=${DOCKER_TAG}"
+            }
+          }
+        
+        stage('Test app in test namespace') {
+            steps{
+			      sh ('''#!/bin/bash
+            sleep 15
+            status_app_test=$(curl -o /dev/null  -s  -w "%{http_code}"  http://10.10.18.158:30000)
+	          if [[ $status_app_test == 200 ]]; then
+	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://tms.exam:30000 AVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
+	          else
+	            curl -X POST -H 'Content-type: application/json' --data '{"text":"SERVICE http://tms.exam:30000 IS UNAVAILABLE IN TEST NAMESPACE"}' ${SLACK_ID}
+	          fi
+            '''
+            }
         }
   }
 }
