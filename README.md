@@ -1,5 +1,4 @@
 ### DevOps project
-[200~
 
 
 1.	Create k8s cluster with kubespray(for example: 1 master, 1 etcd, 2 workers):
